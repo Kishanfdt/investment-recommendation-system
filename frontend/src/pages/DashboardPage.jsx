@@ -1,49 +1,140 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPrediction } from "../api/client";
-import apiClient from "../api/client";
+import {
+  getRiskProfile,
+  getPrediction,
+  getScreener,
+  getMutualFunds,
+  getPortfolio,
+} from "../api/client";
+
+const TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "screener", label: "NIFTY 50 Screener" },
+  { id: "funds", label: "Mutual Funds" },
+  { id: "portfolio", label: "Portfolio" },
+];
 
 export default function DashboardPage() {
   const { profileId } = useParams();
+  const [activeTab, setActiveTab] = useState("overview");
+
   const [riskProfile, setRiskProfile] = useState(null);
   const [prediction, setPrediction] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [screener, setScreener] = useState(null);
+  const [funds, setFunds] = useState(null);
+  const [portfolio, setPortfolio] = useState(null);
 
+  const [loading, setLoading] = useState({ overview: true });
+  const [errors, setErrors] = useState({});
+
+  // Overview loads immediately
   useEffect(() => {
-    async function loadData() {
+    async function loadOverview() {
       try {
-        const riskRes = await apiClient.get(`/profile/${profileId}/risk`);
-        setRiskProfile(riskRes.data);
-
-        const predRes = await getPrediction("TCS.NS");
+        const [riskRes, predRes] = await Promise.all([
+          getRiskProfile(profileId),
+          getPrediction("TCS.NS"),
+        ]);
+        setRiskProfile(riskRes);
         setPrediction(predRes);
       } catch (err) {
-        setError("Failed to load dashboard. Check that the backend is running.");
+        setErrors((prev) => ({ ...prev, overview: "Failed to load overview data." }));
       } finally {
-        setLoading(false);
+        setLoading((prev) => ({ ...prev, overview: false }));
       }
     }
-    loadData();
+    loadOverview();
   }, [profileId]);
 
-  if (loading) {
-    return (
-      <div className="max-w-4xl mx-auto py-12 px-6">
-        <p className="text-slate-400">Loading your dashboard...</p>
-      </div>
-    );
-  }
+  // Other tabs load lazily, only once, when first opened
+  const loadTab = async (tabId) => {
+    if (loading[tabId] || (tabId === "screener" && screener)) return;
+    if (tabId === "funds" && funds) return;
+    if (tabId === "portfolio" && portfolio) return;
 
-  if (error) {
-    return (
-      <div className="max-w-4xl mx-auto py-12 px-6">
-        <div className="bg-red-900/50 border border-red-700 text-red-200 rounded-lg p-4">
-          {error}
-        </div>
+    setLoading((prev) => ({ ...prev, [tabId]: true }));
+    try {
+      if (tabId === "screener") setScreener(await getScreener());
+      if (tabId === "funds") setFunds(await getMutualFunds(profileId));
+      if (tabId === "portfolio") setPortfolio(await getPortfolio(profileId));
+    } catch (err) {
+      setErrors((prev) => ({ ...prev, [tabId]: `Failed to load ${tabId} data.` }));
+    } finally {
+      setLoading((prev) => ({ ...prev, [tabId]: false }));
+    }
+  };
+
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    loadTab(tabId);
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto py-10 px-6">
+      <h1 className="text-3xl font-bold mb-6">Your Investment Dashboard</h1>
+
+      <div className="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => handleTabClick(tab.id)}
+            className={`px-4 py-2 font-medium whitespace-nowrap border-b-2 transition-colors ${
+              activeTab === tab.id
+                ? "border-blue-500 text-blue-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
-    );
-  }
+
+      {activeTab === "overview" && (
+        <OverviewTab
+          loading={loading.overview}
+          error={errors.overview}
+          riskProfile={riskProfile}
+          prediction={prediction}
+        />
+      )}
+      {activeTab === "screener" && (
+        <ScreenerTab loading={loading.screener} error={errors.screener} data={screener} />
+      )}
+      {activeTab === "funds" && (
+        <FundsTab loading={loading.funds} error={errors.funds} data={funds} />
+      )}
+      {activeTab === "portfolio" && (
+        <PortfolioTab loading={loading.portfolio} error={errors.portfolio} data={portfolio} />
+      )}
+
+      <div className="bg-yellow-900/30 border border-yellow-800 text-yellow-200 rounded-lg p-4 text-sm mt-8">
+        <strong>Important:</strong> backtesting shows near-random directional accuracy
+        (~48-50%) and a poorly calibrated confidence score for stock predictions. This
+        is an educational demonstration, not investment advice.
+      </div>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------------
+
+function LoadingState({ message = "Loading..." }) {
+  return <p className="text-slate-400 py-8">{message}</p>;
+}
+
+function ErrorState({ message }) {
+  return (
+    <div className="bg-red-900/50 border border-red-700 text-red-200 rounded-lg p-4">
+      {message}
+    </div>
+  );
+}
+
+function OverviewTab({ loading, error, riskProfile, prediction }) {
+  if (loading) return <LoadingState message="Loading your profile and TCS prediction..." />;
+  if (error) return <ErrorState message={error} />;
+  if (!riskProfile || !prediction) return null;
 
   const signalColor = {
     BUY: "bg-green-900/50 border-green-700 text-green-200",
@@ -52,9 +143,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-12 px-6 space-y-8">
-      <h1 className="text-3xl font-bold">Your Investment Dashboard</h1>
-
+    <div className="space-y-8">
       <div className="bg-slate-800 rounded-xl p-6">
         <h2 className="text-xl font-semibold mb-4">Your Risk Profile</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -108,8 +197,8 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        <h3 className="font-semibold mb-2">Why — Top Contributing Factors</h3>
-        <div className="space-y-2">
+        <h3 className="font-semibold mb-2">SHAP — Top Contributing Factors</h3>
+        <div className="space-y-2 mb-6">
           {prediction.top_shap_factors.map((f) => (
             <div key={f.feature} className="flex justify-between bg-slate-900 rounded-lg px-4 py-2 text-sm">
               <span>{f.feature} = {f.value}</span>
@@ -119,12 +208,132 @@ export default function DashboardPage() {
             </div>
           ))}
         </div>
+
+        <h3 className="font-semibold mb-2">LIME — Local Explanation</h3>
+        <div className="space-y-2">
+          {prediction.top_lime_factors.map((f, i) => (
+            <div key={i} className="flex justify-between bg-slate-900 rounded-lg px-4 py-2 text-sm">
+              <span>{f.condition}</span>
+              <span className={f.weight > 0 ? "text-green-400" : "text-red-400"}>
+                {f.direction} ({f.weight > 0 ? "+" : ""}{f.weight})
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ScreenerTab({ loading, error, data }) {
+  if (loading) return <LoadingState message="Scanning NIFTY 50 (this takes 30-60 seconds)..." />;
+  if (error) return <ErrorState message={error} />;
+  if (!data) return <LoadingState message="Click this tab to load the screener." />;
+
+  const signalColor = {
+    BUY: "text-green-400",
+    SELL: "text-red-400",
+    HOLD: "text-yellow-400",
+    ERROR: "text-slate-500",
+  };
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6">
+      <h2 className="text-xl font-semibold mb-4">NIFTY 50 Screener</h2>
+      <p className="text-slate-400 text-sm mb-4">
+        Ranked by pooled model probability of next-day UP move. TATAMOTORS.NS excluded (2025 demerger).
+      </p>
+      <div className="space-y-1">
+        {data.map((stock) => (
+          <div key={stock.ticker} className="flex justify-between items-center bg-slate-900 rounded-lg px-4 py-2">
+            <span className="font-medium">{stock.ticker}</span>
+            <div className="flex items-center gap-4">
+              {stock.probability_up != null && (
+                <span className="text-slate-400 text-sm">
+                  {(stock.probability_up * 100).toFixed(1)}%
+                </span>
+              )}
+              <span className={`font-semibold ${signalColor[stock.signal]}`}>{stock.signal}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FundsTab({ loading, error, data }) {
+  if (loading) return <LoadingState message="Loading personalized fund recommendations..." />;
+  if (error) return <ErrorState message={error} />;
+  if (!data) return <LoadingState message="Click this tab to load recommendations." />;
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6">
+      <h2 className="text-xl font-semibold mb-1">Mutual Fund Recommendations</h2>
+      <p className="text-slate-400 text-sm mb-4">
+        Matched to your <span className="capitalize font-medium">{data.risk_category}</span> risk profile
+        (fund tier: {data.matched_risk_tier})
+      </p>
+      <div className="space-y-2">
+        {data.recommendations.map((fund, i) => (
+          <div key={i} className="bg-slate-900 rounded-lg px-4 py-3">
+            <p className="font-medium">{fund.scheme_name}</p>
+            <div className="flex gap-4 text-sm text-slate-400 mt-1">
+              <span>{fund.fund_type}</span>
+              <span>{fund.amc}</span>
+              {fund.return_3y != null && <span className="text-green-400">3Y: {fund.return_3y}%</span>}
+              {fund.return_1y != null && <span>1Y: {fund.return_1y}%</span>}
+              {fund.volatility != null && <span>Vol: {fund.volatility}%</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PortfolioTab({ loading, error, data }) {
+  if (loading) return <LoadingState message="Loading portfolio recommendation..." />;
+  if (error) return <ErrorState message={error} />;
+  if (!data) return <LoadingState message="Click this tab to load your portfolio." />;
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6">
+      <h2 className="text-xl font-semibold mb-1">Portfolio Recommendation</h2>
+      <p className="text-slate-400 text-sm mb-6">
+        Strategy: <span className="font-medium">{data.strategy}</span> (matched to your{" "}
+        <span className="capitalize">{data.risk_category}</span> risk profile)
+      </p>
+
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        <div>
+          <p className="text-slate-400 text-sm">Expected Return</p>
+          <p className="text-2xl font-bold">{(data.expected_return * 100).toFixed(2)}%</p>
+        </div>
+        <div>
+          <p className="text-slate-400 text-sm">Volatility</p>
+          <p className="text-2xl font-bold">{(data.volatility * 100).toFixed(2)}%</p>
+        </div>
+        <div>
+          <p className="text-slate-400 text-sm">Sharpe Ratio</p>
+          <p className="text-2xl font-bold">{data.sharpe_ratio.toFixed(3)}</p>
+        </div>
       </div>
 
-      <div className="bg-yellow-900/30 border border-yellow-800 text-yellow-200 rounded-lg p-4 text-sm">
-        <strong>Important:</strong> backtesting shows near-random directional accuracy
-        (~48-50%) and a poorly calibrated confidence score. This is an educational
-        demonstration, not investment advice.
+      <h3 className="font-semibold mb-2">Asset Allocation</h3>
+      <div className="space-y-2">
+        {data.weights.map((w) => (
+          <div key={w.asset} className="flex items-center gap-3">
+            <span className="w-32 text-sm">{w.asset}</span>
+            <div className="flex-1 bg-slate-900 rounded-full h-4 overflow-hidden">
+              <div
+                className="bg-blue-500 h-full"
+                style={{ width: `${w.weight * 100}%` }}
+              />
+            </div>
+            <span className="w-14 text-right text-sm">{(w.weight * 100).toFixed(1)}%</span>
+          </div>
+        ))}
       </div>
     </div>
   );
