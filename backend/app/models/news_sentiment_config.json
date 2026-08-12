@@ -1,0 +1,7 @@
+{
+  "sentiment_model": "ProsusAI/finbert",
+  "sentiment_score_formula": "positive_probability - negative_probability",
+  "aggregation": "daily_mean",
+  "news_source": "Google News RSS (no API key required)",
+  "coverage_note": "RSS returns recent headlines only; historical days default to neutral (0) sentiment"
+}

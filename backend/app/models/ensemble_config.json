@@ -1,0 +1,14 @@
+{
+  "model_weights": {
+    "LGBM": 0.27804971563678194,
+    "RF": 0.26470701003258995,
+    "XGB": 0.2572432743306281,
+    "LSTM": 0.2
+  },
+  "weight_source": "walk_forward_summary.csv (Module 5), programmatically derived -- not hardcoded",
+  "signal_thresholds": {
+    "buy_prob": 0.55,
+    "sell_prob": 0.45,
+    "min_confidence": 0.3
+  }
+}

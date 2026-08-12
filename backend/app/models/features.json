@@ -1,0 +1,19 @@
+[
+    "Adj Close",
+    "Close",
+    "High",
+    "Low",
+    "Open",
+    "Volume",
+    "MA20",
+    "MA50",
+    "Return",
+    "Volatility",
+    "RSI",
+    "EMA12",
+    "EMA26",
+    "MACD",
+    "MACD_Signal",
+    "MACD_Histogram",
+    "Volume_Change"
+]
