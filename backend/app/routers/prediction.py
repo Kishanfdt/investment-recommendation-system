@@ -11,6 +11,7 @@ from functools import lru_cache
 
 from app import config
 from app.feature_engineering import engineer_features, get_latest_feature_row
+from app.services.lime_explainer import explain_with_lime
 
 router = APIRouter(prefix="/prediction", tags=["Prediction"])
 
@@ -82,6 +83,7 @@ class PredictionResponse(BaseModel):
     signal: str
     individual_models: list[ModelSignal]
     top_shap_factors: list[dict]
+    top_lime_factors: list[dict]
 
 
 # ------------------------------------------------------------------
@@ -140,6 +142,7 @@ def predict(ticker: str):
         ModelSignal(model="LSTM", predicted_return=lstm_return, weight=weights["LSTM"]),
     ]
 
+    # ---------------- SHAP (tree-specific, exact) ----------------
     explainer = shap.TreeExplainer(lgbm_model)
     explanation = explainer(X_live)
     shap_values = explanation.values[0]
@@ -163,6 +166,14 @@ def predict(ticker: str):
         for _, row in contrib.iterrows()
     ]
 
+    # ---------------- LIME (model-agnostic, local) ----------------
+    try:
+        top_lime_factors = explain_with_lime(lgbm_model, X_live, num_features=5)
+    except Exception as e:
+        # LIME failure shouldn't take down the whole prediction -- SHAP already
+        # provides an explanation, so degrade gracefully rather than 500ing.
+        top_lime_factors = [{"error": f"LIME explanation unavailable: {str(e)}"}]
+
     return PredictionResponse(
         ticker=ticker,
         as_of_date=str(latest_row["Date"].values[0])[:10],
@@ -170,4 +181,5 @@ def predict(ticker: str):
         signal=signal,
         individual_models=individual_models,
         top_shap_factors=top_shap_factors,
+        top_lime_factors=top_lime_factors,
     )
