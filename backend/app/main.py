@@ -16,7 +16,9 @@ app.add_middleware(
 app.include_router(profile.router)
 app.include_router(prediction.router)
 
+from app.routers import profile, prediction, screener
 
+app.include_router(screener.router)
 @app.get("/")
 def health_check():
     return {"status": "ok", "message": "AI Investment Recommendation API is running"}

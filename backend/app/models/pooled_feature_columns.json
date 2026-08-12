@@ -1,0 +1,14 @@
+[
+  "Return",
+  "Volatility",
+  "RSI",
+  "MACD_norm",
+  "MACD_Signal_norm",
+  "MACD_Histogram_norm",
+  "Volume_Change",
+  "Close_to_MA20",
+  "Close_to_MA50",
+  "MA20_to_MA50",
+  "High_Low_Range_pct",
+  "Volume_zscore"
+]
