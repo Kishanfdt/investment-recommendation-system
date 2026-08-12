@@ -1,0 +1,95 @@
+scheme_code,scheme_name,fund_type,risk_tier,amc,return_1y,return_3y,volatility,latest_nav,latest_nav_date
+143494,Nippon India Ultra Short Duration Fund- Direct Plan- Growth Option,Debt,conservative,Nippon India Mutual Fund,6.95,7.61,0.42,4792.2642,2026-08-11
+138330,PGIM India Corporate Bond Fund - Direct Plan - Growth,Debt,conservative,PGIM India Mutual Fund,5.43,7.46,1.42,51.1933,2026-08-11
+134552,Nippon India Banking and PSU Fund- Direct Plan-Growth Plan- Bonus Option,Debt,conservative,Nippon India Mutual Fund,5.55,7.43,1.46,22.9561,2026-08-11
+119205,DSP Ultra Short Fund - Direct Plan - Growth,Debt,conservative,DSP Mutual Fund,6.69,7.45,0.46,3983.4787,2026-08-11
+140769,Mirae Asset Dynamic Bond Fund -Direct Plan -Growth,Debt,conservative,Mirae Asset Mutual Fund,5.93,7.4,0.74,18.892,2026-08-11
+149007,Tata Floating Rate Fund -Direct Plan-Growth,Debt,conservative,Tata Mutual Fund,6.4,7.61,0.88,13.9372,2026-08-11
+120406,JM Liquid Fund (Direct) - Growth Option,Debt,conservative,JM Financial Mutual Fund,6.35,6.91,0.15,77.0804,2026-08-11
+149076,TRUSTMF Short Duration Fund-Direct Plan-Growth,Debt,conservative,Trust Mutual Fund,5.43,7.26,1.05,1358.4331,2026-08-11
+139259,JM Liquid Fund Unclaimed Redemption IEF (Direct) Growth Plan,Debt,conservative,JM Financial Mutual Fund,0.0,0.0,0.0,41.4437,2022-01-24
+150392,LIC MF Money Market Fund-Direct Plan-Growth,Debt,conservative,LIC Mutual Fund,6.61,6.82,0.46,1295.3833,2026-08-11
+148086,UTI - Bond Fund (Segregated - 17022020) - Direct Plan - Growth Option,Debt,conservative,UTI Mutual Fund,338.55,,300.17,7.3484,2022-01-27
+153105,Mirae Asset Long Duration Fund - Direct Plan - Growth,Debt,conservative,Mirae Asset Mutual Fund,3.64,,4.51,10.6293,2026-08-11
+120137,SBI CONSTANT MATURITY 10 YEAR GILT FUND - DIRECT PLAN - GROWTH,Debt,moderate,SBI Mutual Fund,5.31,7.56,3.35,69.8186,2026-08-11
+118780,Nippon India Credit Risk Fund - Direct Plan - Growth Plan,Debt,moderate,Nippon India Mutual Fund,8.11,9.05,0.99,42.185,2026-08-11
+120764,UTI Credit Risk Fund - Direct Plan - Growth Option,Debt,moderate,UTI Mutual Fund,7.07,7.95,0.98,20.8255,2026-08-11
+148261,Nippon India Credit Risk Fund - Segregated Portfolio 2 - Direct Plan - Growth Plan,Debt,moderate,Nippon India Mutual Fund,,,,0.0,2026-08-11
+148304,Franklin India Credit Risk Fund - Segregated Portfolio 3 (9.50% Yes bank Ltd CO 23Dec21) - Direct Growth Plan,Debt,moderate,Franklin Templeton Mutual Fund,,,,0.0,2026-08-11
+147955,Franklin India Credit Risk Fund- Segregated Portfolio 1- 8.25% Vodafone Idea Ltd-10JUL20-Direct-Growth Plan,Debt,moderate,Franklin Templeton Mutual Fund,,,,0.0,2020-07-20
+118387,Bandhan Gilt Fund with 10 year constant duration Fund - Direct Plan - Growth,Debt,moderate,Bandhan Mutual Fund,6.44,8.21,3.42,49.5803,2026-08-11
+151045,HSBC Credit Risk Fund - Direct Growth,Debt,moderate,HSBC Mutual Fund,6.69,11.86,0.87,37.6387,2026-08-11
+134387,Aditya Birla Sun Life Credit Risk Fund - Direct Plan - Growth,Debt,moderate,Aditya Birla Sun Life Mutual Fund,13.16,13.28,3.61,28.0585,2026-08-11
+133488,Baroda BNP Paribas Credit Risk Fund -Direct-Growth Option,Debt,moderate,Baroda BNP Paribas Mutual Fund,7.15,8.4,0.88,26.4004,2026-08-11
+148101,Nippon India Credit Risk Fund - Segregated Portfolio 1 - Direct Plan - Growth Plan,Debt,moderate,Nippon India Mutual Fund,340.03,,301.43,0.5342,2022-01-27
+148333,Baroda BNP Paribas Credit Risk Fund- Direct- Growth Option- Segregated Portfolio- 1,Debt,moderate,Baroda BNP Paribas Mutual Fund,,,,0.0,2026-08-11
+120711,ICICI Prudential Credit Risk Fund - Direct Plan - Growth,Debt,moderate,ICICI Prudential Mutual Fund,9.02,9.22,1.32,38.5956,2026-08-11
+128051,HDFC Credit Risk Debt Fund - Growth Option - Direct Plan,Debt,moderate,HDFC Mutual Fund,7.83,8.38,1.15,28.2863,2026-08-11
+143783,Mirae Asset Healthcare Fund Direct Growth,Equity,aggressive,Mirae Asset Mutual Fund,22.35,23.51,13.09,51.966,2026-08-11
+144905,Shriram Flexi Cap Fund - Direct Growth,Equity,aggressive,Shriram Mutual Fund,3.24,10.18,13.39,23.1206,2026-08-11
+118678,Nippon India Vision Large & Mid Cap Fund - Direct Plan Growth Plan - Growth Option,Equity,aggressive,Nippon India Mutual Fund,7.83,17.35,14.47,1655.3448,2026-08-11
+149450,Samco Flexi Cap Fund - Direct Plan - Growth Option,Equity,aggressive,Samco Mutual Fund,-1.12,-0.65,15.91,10.59,2026-08-11
+147306,DSP Quant Fund - Direct Plan - Growth,Equity,aggressive,DSP Mutual Fund,5.34,8.97,13.65,23.008,2026-08-11
+152760,Motilal Oswal Manufacturing Fund - Direct Plan- Growth,Equity,aggressive,Motilal Oswal Mutual Fund,9.22,,16.18,12.0913,2026-08-11
+151113,HSBC Value Fund - Direct Growth,Equity,aggressive,HSBC Mutual Fund,7.44,18.82,14.75,130.4165,2026-08-11
+152107,QUANTUM SMALL CAP FUND - DIRECT PLAN GROWTH OPTION,Equity,aggressive,Quantum Mutual Fund,12.76,,15.73,14.32,2026-08-11
+150571,Sundaram Flexicap Fund Direct Growth,Equity,aggressive,Sundaram Mutual Fund,0.91,11.36,13.85,15.5363,2026-08-11
+152694,Motilal Oswal Quant Fund - Direct - Growth,Equity,aggressive,Motilal Oswal Mutual Fund,5.65,,16.47,10.775,2026-08-11
+153309,BAJAJ FINSERV MULTI CAP FUND - DIRECT - GROWTH,Equity,aggressive,Bajaj Finserv Mutual Fund,14.45,,14.98,12.583,2026-08-11
+151478,SBI Dividend Yield Fund - Direct Plan - Growth,Equity,aggressive,SBI Mutual Fund,9.49,13.49,11.67,16.5236,2026-08-11
+144546,Tata Flexi Cap Fund-Direct Plan-Growth,Equity,aggressive,Tata Mutual Fund,2.46,12.31,13.05,27.0237,2026-08-11
+119514,Aditya Birla Sun Life Infrastructure Fund - Growth - Direct Plan,Equity,aggressive,Aditya Birla Sun Life Mutual Fund,16.94,19.5,15.56,121.03,2026-08-11
+152600,HDFC Manufacturing fund - Growth Option - Direct Plan,Equity,aggressive,HDFC Mutual Fund,15.96,,15.97,12.402,2026-08-11
+146549,Mahindra Manulife Large Cap Fund - Direct Plan -Growth,Equity,moderate,Mahindra Manulife Mutual Fund,1.69,11.35,12.91,25.8355,2026-08-11
+148353,ITI Large Cap Fund - Direct Plan - Growth Option,Equity,moderate,ITI Mutual Fund,3.85,11.98,15.0,19.6803,2026-08-11
+148507,Sundaram Large Cap Fund (Formerly Known as Sundaram Blue Chip Fund)Direct Plan - Growth,Equity,moderate,Sundaram Mutual Fund,3.29,9.89,12.87,23.1506,2026-08-11
+120656,UTI Large Cap Fund - Direct Plan - Growth Option,Equity,moderate,UTI Mutual Fund,1.26,9.67,13.16,297.9469,2026-08-11
+120267,LIC MF Large Cap Fund-Direct Plan-Growth,Equity,moderate,LIC Mutual Fund,0.48,9.84,13.97,62.813,2026-08-11
+138312,PGIM India Large Cap Fund - Direct Plan - Growth,Equity,moderate,PGIM India Mutual Fund,2.15,9.39,13.54,406.8,2026-08-11
+120586,ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Direct Plan - Growth,Equity,moderate,ICICI Prudential Mutual Fund,1.71,13.33,12.77,121.67,2026-08-11
+118617,Edelweiss Large Cap Fund - Direct Plan-Growth option,Equity,moderate,Edelweiss Mutual Fund,4.79,12.2,13.26,98.75,2026-08-11
+118825,Mirae Asset Large Cap Fund - Direct Plan - Growth,Equity,moderate,Mirae Asset Mutual Fund,3.95,10.79,13.81,130.208,2026-08-11
+118531,Franklin India Large Cap Fund- Direct - Growth,Equity,moderate,Franklin Templeton Mutual Fund,3.63,11.94,13.05,1160.5398,2026-08-11
+154307,JioBlackRock Large Cap Fund - Direct Plan - Growth Option,Equity,moderate,Jio BlackRock Mutual Fund,,,12.06,10.173,2026-08-11
+119528,Aditya Birla Sun Life Large Cap Fund - Growth - Direct Plan,Equity,moderate,Aditya Birla Sun Life Mutual Fund,2.92,11.95,13.22,590.13,2026-08-11
+148980,BANK OF INDIA Large Cap Fund Direct Plan Growth,Equity,moderate,Bank of India Mutual Fund,9.81,14.93,13.82,18.02,2026-08-11
+141248,Union Largecap Fund - Direct Plan - Growth Option,Equity,moderate,Union Mutual Fund,2.44,9.97,13.7,25.19,2026-08-11
+153705,quant Equity Savings Fund - Growth Option - Direct Plan,Hybrid,moderate,quant Mutual Fund,8.68,,5.9,10.9006,2026-08-11
+154185,The Wealth Company Balanced Advantage Fund - Direct Growth,Hybrid,moderate,The Wealth Company Mutual Fund,,,10.79,10.214,2026-08-11
+143163,Navi Aggressive Hybrid Fund - Direct Plan - Growth,Hybrid,moderate,Navi Mutual Fund,14.02,13.57,12.45,26.1489,2026-08-11
+154232,Capitalmind Multi Asset Allocation Fund-Direct-Growth,Hybrid,moderate,Capitalmind Mutual Fund,,,6.81,10.1231,2026-08-11
+120401,Invesco India Arbitrage Fund - Direct Plan - Growth Option,Hybrid,moderate,Invesco Mutual Fund,6.77,7.59,1.01,37.1164,2026-08-11
+118994,DSP Regular Savings Fund - Direct Plan - Growth,Hybrid,moderate,DSP Mutual Fund,5.12,9.17,3.29,69.4332,2026-08-11
+145724,Tata Arbitrage Fund-Direct Plan-Growth,Hybrid,moderate,Tata Mutual Fund,6.72,7.61,1.0,16.2519,2026-08-11
+118794,Nippon India Aggressive Hybrid Fund  - Direct Plan Growth Plan,Hybrid,moderate,Nippon India Mutual Fund,5.96,12.58,10.61,123.5527,2026-08-11
+152474,Quantum Multi Asset Allocation Fund - Direct Plan Growth Option,Hybrid,moderate,Quantum Mutual Fund,7.39,,9.42,12.49,2026-08-11
+134813,Mirae Asset Aggressive Hybrid Fund - Direct Plan - Growth,Hybrid,moderate,Mirae Asset Mutual Fund,7.44,12.53,10.82,39.918,2026-08-11
+152849,WhiteOak Capital Arbitrage Fund Direct Plan Growth,Hybrid,moderate,WhiteOak Capital Mutual Fund,7.07,,1.05,11.456,2026-08-11
+142038,Union Balanced Advantage Fund - Direct Plan - Growth Option,Hybrid,moderate,Union Mutual Fund,4.85,9.61,9.19,22.68,2026-08-11
+153432,SBI BSE PSU BANK INDEX FUND- Direct Plan- Growth,Index/FoF,moderate,SBI Mutual Fund,22.07,,24.12,13.8622,2026-08-11
+152535,Navi NiftyIT Index Fund - Direct Plan- Growth,Index/FoF,moderate,Navi Mutual Fund,-6.4,,25.13,9.4967,2026-08-11
+153712,Edelweiss Income Plus Arbitrage Active Fund of Funds - Direct Plan Growth,Index/FoF,moderate,Edelweiss Mutual Fund,5.87,,0.71,10.607,2026-08-11
+152616,Edelweiss Nifty Alpha Low Volatility 30 Index Fund - Direct Plan - Growth,Index/FoF,moderate,Edelweiss Mutual Fund,5.97,,13.06,10.3713,2026-08-11
+148928,Mirae Asset NYSE FANG + ETF Fund of Fund Direct Growth,Index/FoF,moderate,Mirae Asset Mutual Fund,33.61,49.07,23.27,44.527,2026-08-11
+153879,Axis CRISIL-IBX Financial Services 3-6 Months Debt Index Fund - Direct Plan - Growth option,Index/FoF,moderate,Axis Mutual Fund,,,0.4,10.6046,2026-08-11
+150854,Axis Nifty SDL September 2026 Debt Index Fund - Direct Plan - Growth,Index/FoF,moderate,Axis Mutual Fund,5.72,7.27,0.37,12.977,2026-08-11
+149331,ICICI Prudential BSE 500 ETF FOF - Direct Plan - Growth,Index/FoF,moderate,ICICI Prudential Mutual Fund,4.98,11.92,13.69,16.2562,2026-08-11
+152742,Tata Nifty India Tourism Index Fund - Direct - Growth,Index/FoF,moderate,Tata Mutual Fund,-10.58,,21.8,9.2773,2026-08-11
+115132,Quantum Gold ETF FOF - Direct Plan Growth Option,Index/FoF,moderate,Quantum Mutual Fund,51.39,36.0,31.57,58.1706,2026-08-11
+131865,Aditya Birla Sun Life Multi Asset Omni FoF- Direct Plan - Growth Option,Index/FoF,moderate,Aditya Birla Sun Life Mutual Fund,19.01,18.63,13.66,41.4568,2026-08-11
+150746,BANDHAN CRISIL IBX GILT APRIL 2026 INDEX FUND - DIRECT PLAN - GROWTH,Index/FoF,moderate,Bandhan Mutual Fund,5.82,6.84,0.32,12.7711,2026-04-30
+120605,ICICI Prudential Gilt Fund Investment Plan PF Option - Direct Plan -Growth Option,Other,moderate,ICICI Prudential Mutual Fund,3.91,8.83,3.97,35.5313,2018-05-25
+120611,ICICI Prudential Gilt Fund Treasury Plan PF Option - Direct Plan -Growth Option,Other,moderate,ICICI Prudential Mutual Fund,4.19,9.82,1.63,25.8427,2018-05-25
+120668,ICICI Prudential MIP - Direct Plan -  Growth,Other,moderate,ICICI Prudential Mutual Fund,6.21,8.25,3.0,49.7829,2018-05-25
+120582,ICICI Prudential Dynamic Bond Fund - Direct Plan -  Growth,Other,moderate,ICICI Prudential Mutual Fund,4.14,8.65,2.84,20.425,2018-05-25
+120300,ICICI Prudential Blended Plan B - Direct Plan -  Growth Option - I,Other,moderate,ICICI Prudential Mutual Fund,10.57,9.94,1.7,24.0808,2016-10-07
+146721,ICICI Prudential Retirement Fund - Hybrid Aggressive - Direct Plan - Growth Option,Solution Oriented,moderate,ICICI Prudential Mutual Fund,14.54,19.87,12.48,32.07,2026-08-11
+146930,Aditya Birla Sun Life Retirement Fund-The 40s Plan-Direct Plan-Growth,Solution Oriented,moderate,Aditya Birla Sun Life Mutual Fund,7.72,12.67,10.52,21.941,2026-08-11
+119719,SBI Children's Fund - Savings Plan - DIRECT PLAN - GROWTH,Solution Oriented,moderate,SBI Mutual Fund,9.86,12.44,4.07,130.6801,2026-08-11
+146716,ICICI Prudential Retirement Fund - Hybrid Conservative - Direct Plan - Growth Option,Solution Oriented,moderate,ICICI Prudential Mutual Fund,8.8,11.04,4.5,20.4139,2026-08-11
+152102,Bandhan Retirement Fund - Direct Plan - Growth,Solution Oriented,moderate,Bandhan Mutual Fund,5.03,,8.41,13.416,2026-08-11
+133569,Nippon India Retirement Fund- Income Generation Scheme- Direct Plan- Growth Plan - Growth Option,Solution Oriented,moderate,Nippon India Mutual Fund,3.51,7.94,5.27,23.7508,2026-08-11
+133629,Nippon India Retirement Fund- Income Generation Scheme- Direct Plan-Growth Plan- Bonus Option,Solution Oriented,moderate,Nippon India Mutual Fund,3.51,7.94,5.27,23.7508,2026-08-11
+120285,LIC MF Children's Fund-Direct Plan-Growth,Solution Oriented,moderate,LIC Mutual Fund,11.39,11.54,12.61,39.4994,2026-08-11
+146727,ICICI Prudential Retirement Fund - Pure Debt - Direct Plan - Growth Option,Solution Oriented,moderate,ICICI Prudential Mutual Fund,5.16,7.02,1.72,17.2475,2026-08-11
+146575,Aditya Birla Sun Life Retirement Fund-The 30s Plan-Direct Growth,Solution Oriented,moderate,Aditya Birla Sun Life Mutual Fund,19.18,17.73,14.29,25.902,2026-08-11
