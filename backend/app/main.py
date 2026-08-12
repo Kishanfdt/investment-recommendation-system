@@ -18,7 +18,9 @@ app.include_router(prediction.router)
 
 from app.routers import profile, prediction, screener
 from app.routers import profile, prediction, screener, mutual_funds
+from app.routers import profile, prediction, screener, mutual_funds, portfolio
 
+app.include_router(portfolio.router)
 app.include_router(mutual_funds.router)
 
 app.include_router(screener.router)
