@@ -12,6 +12,7 @@ from functools import lru_cache
 from app import config
 from app.feature_engineering import engineer_features, get_latest_feature_row
 from app.services.lime_explainer import explain_with_lime
+from app.services.supabase_client import supabase
 
 router = APIRouter(prefix="/prediction", tags=["Prediction"])
 
@@ -170,9 +171,25 @@ def predict(ticker: str):
     try:
         top_lime_factors = explain_with_lime(lgbm_model, X_live, num_features=5)
     except Exception as e:
-        # LIME failure shouldn't take down the whole prediction -- SHAP already
-        # provides an explanation, so degrade gracefully rather than 500ing.
         top_lime_factors = [{"error": f"LIME explanation unavailable: {str(e)}"}]
+
+    # ---------------- Log this prediction for later accuracy tracking ----------------
+    try:
+        prediction_date = pd.Timestamp(latest_row["Date"].values[0]) + pd.tseries.offsets.BDay(1)
+        supabase.table("prediction_logs").upsert({
+            "ticker": ticker,
+            "prediction_date": str(prediction_date.date()),
+            "ensemble_probability_up": round(weighted_prob, 4),
+            "signal": signal,
+            "rf_probability": round(rf_prob, 4),
+            "xgb_probability": round(xgb_prob, 4),
+            "lgbm_probability": round(lgbm_prob, 4),
+            "lstm_predicted_return": round(lstm_return, 4) if lstm_return is not None else None,
+            "predicted_direction": 1 if weighted_prob >= 0.5 else 0,
+            "previous_close": float(latest_row["Close"].values[0]),
+        }, on_conflict="ticker,prediction_date").execute()
+    except Exception as e:
+        print(f"WARNING: failed to log prediction: {e}")
 
     return PredictionResponse(
         ticker=ticker,

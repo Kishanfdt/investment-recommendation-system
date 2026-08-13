@@ -1,1 +1,26 @@
 @import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/lora/500.css";
+@import "@fontsource/lora/600.css";
+
+@theme {
+  --color-navy-950: #0a0e1a;
+  --color-navy-900: #0f1729;
+  --color-navy-800: #161f38;
+  --color-navy-700: #1f2b4d;
+  --color-navy-600: #2a3a63;
+
+  --color-gold-400: #e8c26a;
+  --color-gold-500: #d4a94a;
+  --color-gold-600: #b8892f;
+
+  --font-serif: "Lora", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  background-color: #0a0e1a;
+  font-family: "Inter", sans-serif;
+}

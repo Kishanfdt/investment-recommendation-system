@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers import profile, prediction
+from app.routers import profile, prediction, screener, mutual_funds, portfolio, monitoring
 
 app = FastAPI(title="AI Investment Recommendation API")
 
@@ -22,7 +23,7 @@ from app.routers import profile, prediction, screener, mutual_funds, portfolio
 
 app.include_router(portfolio.router)
 app.include_router(mutual_funds.router)
-
+app.include_router(monitoring.router)
 app.include_router(screener.router)
 @app.get("/")
 def health_check():

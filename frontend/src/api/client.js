@@ -27,4 +27,7 @@ export const getMutualFunds = (profileId) =>
 export const getPortfolio = (profileId) =>
   apiClient.get(`/portfolio/recommendation/${profileId}`).then((res) => res.data);
 
+export const getMonitoringStats = (ticker = "TCS.NS") =>
+  apiClient.get(`/monitoring/stats?ticker=${ticker}`).then((res) => res.data);
+
 export default apiClient;
