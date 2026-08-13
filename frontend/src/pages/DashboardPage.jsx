@@ -4,12 +4,14 @@ import {
   getRiskProfile,
   getPrediction,
   getScreener,
+  getTopPicks,
   getMutualFunds,
   getPortfolio,
 } from "../api/client";
 
 const TABS = [
   { id: "overview", label: "Overview" },
+  { id: "topPicks", label: "Top Picks" },
   { id: "screener", label: "NIFTY 50 Screener" },
   { id: "funds", label: "Mutual Funds" },
   { id: "portfolio", label: "Portfolio" },
@@ -22,6 +24,7 @@ export default function DashboardPage() {
   const [riskProfile, setRiskProfile] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [screener, setScreener] = useState(null);
+  const [topPicks, setTopPicks] = useState(null);
   const [funds, setFunds] = useState(null);
   const [portfolio, setPortfolio] = useState(null);
 
@@ -49,13 +52,16 @@ export default function DashboardPage() {
 
   // Other tabs load lazily, only once, when first opened
   const loadTab = async (tabId) => {
-    if (loading[tabId] || (tabId === "screener" && screener)) return;
+    if (loading[tabId]) return;
+    if (tabId === "screener" && screener) return;
+    if (tabId === "topPicks" && topPicks) return;
     if (tabId === "funds" && funds) return;
     if (tabId === "portfolio" && portfolio) return;
 
     setLoading((prev) => ({ ...prev, [tabId]: true }));
     try {
       if (tabId === "screener") setScreener(await getScreener());
+      if (tabId === "topPicks") setTopPicks(await getTopPicks(5));
       if (tabId === "funds") setFunds(await getMutualFunds(profileId));
       if (tabId === "portfolio") setPortfolio(await getPortfolio(profileId));
     } catch (err) {
@@ -97,6 +103,9 @@ export default function DashboardPage() {
           riskProfile={riskProfile}
           prediction={prediction}
         />
+      )}
+      {activeTab === "topPicks" && (
+        <TopPicksTab loading={loading.topPicks} error={errors.topPicks} data={topPicks} />
       )}
       {activeTab === "screener" && (
         <ScreenerTab loading={loading.screener} error={errors.screener} data={screener} />
@@ -221,6 +230,45 @@ function OverviewTab({ loading, error, riskProfile, prediction }) {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function TopPicksTab({ loading, error, data }) {
+  if (loading) return <LoadingState message="Analyzing NIFTY 50 for top picks (30-60 seconds)..." />;
+  if (error) return <ErrorState message={error} />;
+  if (!data) return <LoadingState message="Click this tab to load top picks." />;
+
+  return (
+    <div className="space-y-4">
+      <p className="text-slate-400 text-sm">{data.note}</p>
+      {data.top_picks.map((pick, i) => (
+        <div key={pick.ticker} className="bg-slate-800 rounded-xl p-6">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl font-bold text-slate-500">#{i + 1}</span>
+              <span className="text-xl font-semibold">{pick.ticker}</span>
+            </div>
+            <span className="text-green-400 font-semibold text-lg">
+              {(pick.probability_up * 100).toFixed(1)}% UP
+            </span>
+          </div>
+          <p className="text-slate-400 text-sm mb-3">
+            Model agreement std: {pick.model_agreement}{" "}
+            ({pick.model_agreement < 0.03 ? "high agreement" : "moderate agreement"})
+          </p>
+          <div className="space-y-1">
+            {pick.top_reasons.map((r, j) => (
+              <div key={j} className="flex justify-between bg-slate-900 rounded-lg px-3 py-2 text-sm">
+                <span>{r.feature} = {r.value}</span>
+                <span className={r.direction.includes("UP") ? "text-green-400" : "text-red-400"}>
+                  {r.direction}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

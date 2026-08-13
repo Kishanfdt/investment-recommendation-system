@@ -3,7 +3,7 @@ import axios from "axios";
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: { "Content-Type": "application/json" },
-  timeout: 90000, // screener endpoint can take 30-60s
+  timeout: 90000, // screener/top-picks endpoints can take 30-60s
 });
 
 export const onboardInvestor = (data) =>
@@ -17,6 +17,9 @@ export const getPrediction = (ticker) =>
 
 export const getScreener = () =>
   apiClient.get(`/screener/nifty50`).then((res) => res.data);
+
+export const getTopPicks = (topN = 5) =>
+  apiClient.get(`/screener/top-picks?top_n=${topN}`).then((res) => res.data);
 
 export const getMutualFunds = (profileId) =>
   apiClient.get(`/mutual-funds/recommendations/${profileId}?top_n=10`).then((res) => res.data);
