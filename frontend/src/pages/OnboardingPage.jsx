@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onboardInvestor } from "../api/client";
+import { useAuth } from "../context/AuthContext";
 import { Card, Alert } from "../components/ui";
 
 export default function OnboardingPage() {
   const navigate = useNavigate();
+  const { user, refreshProfile } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const [form, setForm] = useState({
-    full_name: "",
-    email: "",
     age: 25,
     annual_income_range: "5-10L",
     investment_horizon_years: 5,
@@ -31,8 +31,16 @@ export default function OnboardingPage() {
     setLoading(true);
     setError(null);
     try {
-      const result = await onboardInvestor(form);
-      navigate(`/dashboard/${result.profile_id}`);
+      // Pass auth user info so backend links the profile to this user_id
+      const payload = {
+        ...form,
+        full_name: user?.user_metadata?.full_name || "Investor",
+        email: user?.email || "",
+        user_id: user?.id || null,
+      };
+      await onboardInvestor(payload);
+      await refreshProfile(); // hydrate profileId into AuthContext
+      navigate("/dashboard");
     } catch (err) {
       setError(
         err.response?.data?.detail
@@ -54,9 +62,14 @@ export default function OnboardingPage() {
         Get Started
       </p>
       <h1 className="font-serif text-4xl text-white mb-2">Investor Onboarding</h1>
-      <p className="text-slate-400 mb-10">
-        A few questions help us personalize every recommendation to your risk tolerance.
+      <p className="text-slate-400 mb-2">
+        A few questions help us personalise every recommendation to your risk tolerance.
       </p>
+      {user?.email && (
+        <p className="text-slate-500 text-sm mb-10">
+          Setting up profile for <span className="text-gold-400">{user.email}</span>
+        </p>
+      )}
 
       {error && <Alert tone="error">{error}</Alert>}
 
@@ -66,28 +79,6 @@ export default function OnboardingPage() {
             About You
           </p>
           <div className="space-y-5">
-            <div>
-              <label className={labelClass}>Full Name</label>
-              <input
-                type="text"
-                required
-                value={form.full_name}
-                onChange={(e) => handleChange("full_name", e.target.value)}
-                className={inputClass}
-              />
-            </div>
-
-            <div>
-              <label className={labelClass}>Email</label>
-              <input
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => handleChange("email", e.target.value)}
-                className={inputClass}
-              />
-            </div>
-
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className={labelClass}>Age</label>
@@ -117,14 +108,17 @@ export default function OnboardingPage() {
 
             <div>
               <label className={labelClass}>
-                Investment Horizon — <span className="text-gold-400">{form.investment_horizon_years} years</span>
+                Investment Horizon —{" "}
+                <span className="text-gold-400">{form.investment_horizon_years} years</span>
               </label>
               <input
                 type="range"
                 min="1"
                 max="20"
                 value={form.investment_horizon_years}
-                onChange={(e) => handleChange("investment_horizon_years", parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleChange("investment_horizon_years", parseInt(e.target.value))
+                }
                 className="w-full accent-gold-500"
               />
             </div>
@@ -147,7 +141,9 @@ export default function OnboardingPage() {
               <label className={labelClass}>Investment Experience</label>
               <select
                 value={form.existing_investment_experience}
-                onChange={(e) => handleChange("existing_investment_experience", e.target.value)}
+                onChange={(e) =>
+                  handleChange("existing_investment_experience", e.target.value)
+                }
                 className={inputClass}
               >
                 <option value="none">None</option>
@@ -165,10 +161,14 @@ export default function OnboardingPage() {
           </p>
           <div className="space-y-5">
             <div>
-              <label className={labelClass}>If your portfolio dropped 20% in a month, you would:</label>
+              <label className={labelClass}>
+                If your portfolio dropped 20% in a month, you would:
+              </label>
               <select
                 value={form.q1_reaction_to_20pct_drop}
-                onChange={(e) => handleChange("q1_reaction_to_20pct_drop", parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleChange("q1_reaction_to_20pct_drop", parseInt(e.target.value))
+                }
                 className={inputClass}
               >
                 <option value={1}>Sell everything immediately</option>
@@ -183,7 +183,9 @@ export default function OnboardingPage() {
               <label className={labelClass}>Your priority is:</label>
               <select
                 value={form.q2_investment_priority}
-                onChange={(e) => handleChange("q2_investment_priority", parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleChange("q2_investment_priority", parseInt(e.target.value))
+                }
                 className={inputClass}
               >
                 <option value={1}>Maximum safety, minimal growth</option>
@@ -198,7 +200,9 @@ export default function OnboardingPage() {
               <label className={labelClass}>Your income is:</label>
               <select
                 value={form.q4_income_stability}
-                onChange={(e) => handleChange("q4_income_stability", parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleChange("q4_income_stability", parseInt(e.target.value))
+                }
                 className={inputClass}
               >
                 <option value={1}>Very unstable</option>
@@ -211,7 +215,8 @@ export default function OnboardingPage() {
 
             <div>
               <label className={labelClass}>
-                Maximum loss you'd tolerate in a year — <span className="text-gold-400">{form.q5_loss_tolerance_pct}%</span>
+                Maximum loss you&apos;d tolerate in a year —{" "}
+                <span className="text-gold-400">{form.q5_loss_tolerance_pct}%</span>
               </label>
               <input
                 type="range"
@@ -219,7 +224,9 @@ export default function OnboardingPage() {
                 max="30"
                 step="5"
                 value={form.q5_loss_tolerance_pct}
-                onChange={(e) => handleChange("q5_loss_tolerance_pct", parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleChange("q5_loss_tolerance_pct", parseInt(e.target.value))
+                }
                 className="w-full accent-gold-500"
               />
             </div>
@@ -231,7 +238,7 @@ export default function OnboardingPage() {
           disabled={loading}
           className="w-full bg-gold-500 hover:bg-gold-600 disabled:bg-navy-600 disabled:text-slate-400 disabled:cursor-not-allowed text-navy-950 font-semibold rounded-lg px-4 py-3.5 transition-colors"
         >
-          {loading ? "Creating your profile..." : "Get My Risk Profile"}
+          {loading ? "Creating your profile…" : "Get My Risk Profile"}
         </button>
       </form>
     </div>
