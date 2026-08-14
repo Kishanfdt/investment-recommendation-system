@@ -6,6 +6,26 @@ The platform combines multi-model machine learning predictions with dual explain
 
 ---
 
+## 📌 Project Overview & Value Proposition
+
+### 🔍 Background & Industry Problem
+Retail stock investors frequently encounter severe analytical hurdles when making asset allocation decisions:
+1. **Information Overload & Noise**: Evaluating financial statements, technical indicators (RSI, MACD, Bollinger Bands, Moving Averages), and market momentum across NIFTY 50 equities requires deep quantitative experience that most individual investors lack.
+2. **Black-Box AI Skepticism**: Modern robo-advisors often deliver automated stock recommendations without explaining *why* a particular asset is flagged as a "Buy" or "Sell", creating distrust among users who hesitate to deploy capital based on unexplainable machine learning predictions.
+3. **Generic & One-Size-Fits-All Advice**: Off-the-shelf stock pickers ignore personal investor risk profiles, pushing high-volatility momentum assets onto conservative investors or low-yield instruments onto aggressive growth seekers.
+4. **Unmonitored Model Degradation**: Financial markets are non-stationary; predictive models inevitably experience accuracy decay and concept drift due to shifting macroeconomic conditions. Standard retail tools lack transparent monitoring and resolution mechanisms for algorithmic drift.
+
+### 💡 Core Solution & Platform Vision
+The **AI-Powered Investment Recommendation System** bridges the gap between sophisticated institutional quantitative finance and retail investor accessibility. It transforms complex market data into transparent, risk-aligned, actionable investment intelligence:
+
+- 🎯 **Risk-Personalized Decision Support**: Calculates a tailored investor risk score (Low, Medium, High) using an interactive questionnaire to dynamically adjust stock recommendations, mutual fund discovery, and asset weightings.
+- 🔮 **Multi-Model Machine Learning Ensemble**: Combines classic tree models (Random Forest), gradient-boosted decision trees (XGBoost, LightGBM), and deep learning sequence models (LSTM) trained on historical price action and technical indicators.
+- 💡 **Dual Explainable AI (XAI)**: Unpacks machine learning inference using **SHAP** (global and local feature attributions) and **LIME** (surrogate local models) to show exact metrics driving each recommendation, complemented by an interactive plain-language Explainability Guide.
+- ⚖️ **Modern Portfolio Theory (MPT) Optimization**: Computes Mean-Variance asset allocations along the Efficient Frontier, optimizing Sharpe ratios and portfolio risk bounds tailored to the user's risk tolerance.
+- 🛡️ **Enterprise Governance & Drift Monitoring**: Tracks directional accuracy, RMSE/MAE metrics, and anomaly alerts in real-time, empowering system analysts and users to monitor model health and execute resolution workflows.
+
+---
+
 ## 🌟 Key Features & Implementation Status
 
 | # | Feature Area | Primary Endpoints / Modules | Key Technology / Skill | Status |
