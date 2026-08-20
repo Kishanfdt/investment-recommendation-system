@@ -284,9 +284,3 @@ npm run build
 cd backend
 python -m py_compile app/main.py
 ```
-
----
-
-## 📜 License
-
-Distributed under the **MIT License**. See `LICENSE` for details.
